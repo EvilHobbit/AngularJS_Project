@@ -1,11 +1,6 @@
-
+// Shopping List Check Off Module 2 solution js file
 (function () {
 'use strict';
-
-//List of items at the beginning
-//I believe it will be an improvement if we use jquery and a .json..
-//will make it another time... maybe
-
 
 angular.module("ShoppingListCheckOff", [])
 .controller('ToBuyShoppingController',ToBuyShoppingController)
@@ -14,72 +9,66 @@ angular.module("ShoppingListCheckOff", [])
 
 ToBuyShoppingController.$inject['ShoppingListCheckOffService'];
 function ToBuyShoppingController(ShoppingListCheckOffService) {
-  var itemToBuy = this;
+    var itemToBuy = this;
 
-  itemToBuy.items = ShoppingListCheckOffService.getItemsToBuy();
-
-  itemToBuy.giveItem = function (itemIndex){
-    ShoppingListCheckOffService.giveItem(itemIndex);
-  };
-
-  itemToBuy.message = function () {
-    return itemToBuy.items.length === 0;
-  };
+    itemToBuy.items = ShoppingListCheckOffService.fetchItemsToBuy();
+    itemToBuy.giveItem = function (itemIndex){
+        ShoppingListCheckOffService.giveItem(itemIndex);
+    };
+    itemToBuy.message = function () {
+        return itemToBuy.items.length === 0;
+    };
 }
 
 AlreadyBoughtShoppingController.$inject['ShoppingListCheckOffService'];
 function AlreadyBoughtShoppingController(ShoppingListCheckOffService) {
-  var itemBought = this;
+    var itemBought = this;
 
-  itemBought.items = ShoppingListCheckOffService.getItemsBought();
-
-  itemBought.message = function () {
-    return itemBought.items.length === 0;
-  };
+    itemBought.items = ShoppingListCheckOffService.fetchItemsBought();
+    itemBought.message = function () {
+        return itemBought.items.length === 0;
+    };
 }
 
 function ShoppingListCheckOffService() {
-  var service = this;
+    var service = this;
 
-  // List of shopping items
-  var items = [
-    {name: "dish soap", quantity: 1},
-    {name: "water",     quantity: 1},
-    {name: "berries",   quantity: 1},
-    {name: "peanuts",   quantity: 1},
-    {name: "butter",    quantity: 1},
-    {name: "oranges",   quantity: 4},
-    {name: "apples",    quantity: 4},
-    {name: "bread",     quantity: 1},
-    {name: "beer",      quantity: 1}
-  ];
-  var itemsToBuy = items;
-  var itemsBought = [];
+    // List of shopping items
+    var items = [
+      {name: "dish soap", quantity: 1},
+      {name: "water",     quantity: 1},
+      {name: "berries",   quantity: 1},
+      {name: "peanuts",   quantity: 1},
+      {name: "butter",    quantity: 1},
+      {name: "oranges",   quantity: 4},
+      {name: "apples",    quantity: 4},
+      {name: "bread",     quantity: 1},
+      {name: "beer",      quantity: 1}
+    ];
+    var itemsToBuy = items;
+    var itemsBought = [];
 
-  //Add item on the list of items Bought and splice the item of the list to Buy
-  service.giveItem = function (itemsIndex) {
-    itemsBought.push(itemsToBuy[itemsIndex]);
-    itemsToBuy.splice(itemsIndex, 1);
-  };
+    service.giveItem = function (itemsIndex) {
+        itemsBought.push(itemsToBuy[itemsIndex]);
+        itemsToBuy.splice(itemsIndex, 1);
+    };
 
-  //Give the list of item to Buy
-  service.getItemsToBuy = function () {
-    return itemsToBuy;
-  };
+    service.fetchItemsToBuy = function () {
+        return itemsToBuy;
+    };
 
-  //Give the list of item Bought
-  service.getItemsBought = function () {
-    return itemsBought;
-  };
+    service.fetchItemsBought = function () {
+        return itemsBought;
+    };
 
-  service.hasNoItemBuy = function (listOfItems) {
-    if (listOfItems.length == 0) {
-      console.log("hasNoItemBuy is true");
-      return true;
+    service.hasNoItemBuy = function (listOfItems) {
+        if (listOfItems.length == 0) {
+        console.log("hasNoItemBuy is true");
+        return true;
     }
     else {
-      console.log("hasNoItemBuy is false");
-      return false;
+        console.log("hasNoItemBuy is false");
+        return false;
     }
   };
 }

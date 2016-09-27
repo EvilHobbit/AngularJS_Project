@@ -1,3 +1,4 @@
+<!-- Shopping List Check Off Module 2 solution html file -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,7 +23,7 @@
       }
     </style>
     <script src="angular.min.js"></script>
-    <script src="app1.js"></script>
+    <script src="app.js"></script>
   </head>
 <body ng-app="ShoppingListCheckOff">
   <div class="container">
@@ -42,7 +43,7 @@
        </li>
      </ul>
      <div class="emptyMessage" ng-if="itemToBuy.message()">Everything is bought!</div>
-    </div>
+   </div> <!-- end of To Buy List -->
 
     <!-- Already Bought List -->
     <div class="col-md-6" ng-controller="AlreadyBoughtShoppingController as itemBought">
@@ -54,7 +55,8 @@
      </ul>
      <div class="emptyMessage" ng-if="itemBought.message()">Nothing bought yet.</div>
     </div>
-  </div>
+  </div> <!-- end of Already Bought List -->
+
 </div>
 
 
